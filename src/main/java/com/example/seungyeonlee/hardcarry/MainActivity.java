@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView inputTextView;
     private Button searchBtn;
-    private String userAccountId;
+    private String userAccountId, name;
     private Integer profileIconId;
 
     private List matchList;
@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                         System.out.println("@@@@@@@@@@@@@@@@");
                         userAccountId = response.body().getAccountId();
                         profileIconId = response.body().getProfileIconId();
+                        name = response.body().getName();
                         Toast.makeText(getApplicationContext(), "success"+response.body().getName(), Toast.LENGTH_SHORT).show();
                         System.out.println(response.body().getName());
                     }
@@ -90,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 //                EditText editText = (EditText) findViewById(R.id.editText);
 //                String message = editText.getText().toString();
                 intent.putExtra("summonerAccountId", userAccountId);
-                intent.putExtra("name", inputTextView.getText().toString());
+                intent.putExtra("name", name);
                 intent.putExtra("profileIconId", profileIconId);
                 startActivity(intent);
 
