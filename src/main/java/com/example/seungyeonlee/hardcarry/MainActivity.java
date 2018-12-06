@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView inputTextView;
     private Button searchBtn;
-    private String userAccountId, name;
+    private String userAccountId, name, encryptedSummonerId;
     private Integer profileIconId;
 
     private List matchList;
@@ -52,48 +52,62 @@ public class MainActivity extends AppCompatActivity {
                 // 조회하려는 소환사 이름
                 String summonerName = inputTextView.getText().toString();
 
-                // retrofit 객체 생성
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl(RiotAPI.BASE_URL)
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
+                if (summonerName.matches("")) {
+                    Toast.makeText(getApplicationContext(), "소환사명을 입력해주세요!", Toast.LENGTH_LONG).show();
 
-                API api = retrofit.create(API.class);
+                } else {
+                    // retrofit 객체 생성
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl(RiotAPI.BASE_URL)
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
 
-                Call<Info> call = api.getSummonersInfo(
-                        Key.getApiKey(), summonerName
-                );
+                    API api = retrofit.create(API.class);
 
-                // response 받는 부분
-                call.enqueue(new Callback<Info>() {
+                    Call<Info> call = api.getSummonersInfo(
+                            Key.getApiKey(), summonerName
+                    );
 
-                    // 응답
-                    @Override
-                    public void onResponse(Call<Info> call, Response<Info> response) {
-                        System.out.println("@@@@@@@@@@@@@@@@");
-                        userAccountId = response.body().getAccountId();
-                        profileIconId = response.body().getProfileIconId();
-                        name = response.body().getName();
-                        Toast.makeText(getApplicationContext(), "success"+response.body().getName(), Toast.LENGTH_SHORT).show();
-                        System.out.println(response.body().getName());
-                    }
+                    // response 받는 부분
+                    call.enqueue(new Callback<Info>() {
 
-                    @Override
-                    public void onFailure(Call<Info> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_LONG).show();
-                    }
+                        // 응답
+                        @Override
+                        public void onResponse(Call<Info> call, Response<Info> response) {
 
-                });
+                            // 데이터 있는지 확인
+                            if (response.isSuccessful() && response.body() != null) {
 
-                // 다음 뷰로 데이터 넘겨주기
+                                // 넘겨줄 데이터들..
+                                userAccountId = response.body().getAccountId();
+                                profileIconId = response.body().getProfileIconId();
+                                name = response.body().getName();
+                                encryptedSummonerId = response.body().getId();
 
-                Intent intent = new Intent(MainActivity.this, DisplayResultActivity.class);
-//                EditText editText = (EditText) findViewById(R.id.editText);
-//                String message = editText.getText().toString();
-                intent.putExtra("summonerAccountId", userAccountId);
-                intent.putExtra("name", name);
-                intent.putExtra("profileIconId", profileIconId);
-                startActivity(intent);
+                                Toast.makeText(getApplicationContext(), "success"+response.body().getName(), Toast.LENGTH_SHORT).show();
+
+                                // 다음 뷰로 데이터 넘겨주기
+
+                                Intent intent = new Intent(MainActivity.this, DisplayResultActivity.class);
+
+                                intent.putExtra("summonerAccountId", userAccountId);
+                                intent.putExtra("name", name);
+                                intent.putExtra("profileIconId",profileIconId);
+                                intent.putExtra("encryptedSummonerId", encryptedSummonerId);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(getApplicationContext(), "존재하지 않는 소환사 이름입니다.", Toast.LENGTH_LONG).show();
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<Info> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_LONG).show();
+                        }
+
+                    });
+                }
 
 
             }
