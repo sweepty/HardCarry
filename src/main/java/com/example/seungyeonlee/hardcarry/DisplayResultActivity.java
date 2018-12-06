@@ -201,9 +201,11 @@ public class DisplayResultActivity extends AppCompatActivity {
             case "CHALLENGER":
                 imgName = tier.toLowerCase();
                 break;
+
             case "MASTER":
                 imgName = tier.toLowerCase();
                 break;
+
             case "PLATINUM":
                 switch (rank) {
                     case "I": imgName = tier.toLowerCase().concat("_i"); break;
@@ -213,6 +215,8 @@ public class DisplayResultActivity extends AppCompatActivity {
                     default: imgName = tier.toLowerCase().concat("_v"); break;
 
                 }
+                break;
+
             case "DIAMOND":
                 switch (rank) {
                     case "I": imgName = tier.toLowerCase().concat("_i"); break;
@@ -221,6 +225,8 @@ public class DisplayResultActivity extends AppCompatActivity {
                     case "IV": imgName = tier.toLowerCase().concat("_iv"); break;
                     default: imgName = tier.toLowerCase().concat("_v"); break;
                 }
+                break;
+
             case "GOLD":
                 switch (rank) {
                     case "I": imgName = tier.toLowerCase().concat("_i"); break;
@@ -229,6 +235,8 @@ public class DisplayResultActivity extends AppCompatActivity {
                     case "IV": imgName = tier.toLowerCase().concat("_iv"); break;
                     default: imgName = tier.toLowerCase().concat("_v"); break;
                 }
+                break;
+
             case "SLIVER":
                 switch (rank) {
                     case "I": imgName = tier.toLowerCase().concat("_i"); break;
@@ -237,6 +245,8 @@ public class DisplayResultActivity extends AppCompatActivity {
                     case "IV": imgName = tier.toLowerCase().concat("_iv"); break;
                     default: imgName = tier.toLowerCase().concat("_v"); break;
                 }
+                break;
+
             case "BRONZE":
                 switch (rank) {
                     case "I": imgName = tier.toLowerCase().concat("_i"); break;
@@ -245,11 +255,12 @@ public class DisplayResultActivity extends AppCompatActivity {
                     case "IV": imgName = tier.toLowerCase().concat("_iv"); break;
                     default: imgName = tier.toLowerCase().concat("_v"); break;
                 }
+                break;
             default:
                 imgName = "provisional";
                 break;
         }
-        imgName.concat(".png");
+//        imgName.concat(".png");
         Context context = tierImageView.getContext();
         int id = context.getResources().getIdentifier(imgName, "drawable", context.getPackageName());
         tierImageView.setImageResource(id);
