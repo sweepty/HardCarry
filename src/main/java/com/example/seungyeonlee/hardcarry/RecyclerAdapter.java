@@ -1,7 +1,7 @@
 package com.example.seungyeonlee.hardcarry;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
+import android.graphics.Color;
+import android.support.annotation.ColorInt;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,10 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-
-import com.example.seungyeonlee.hardcarry.Models.League;
 
 import java.util.List;
 
@@ -64,6 +61,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         holder.leaguePointTextView.setText(String.valueOf(leaguePoint).concat("LP"));
         holder.winTextView.setText(String.valueOf(win).concat("승"));
         holder.loseTextView.setText(String.valueOf(lose).concat("패"));
+        double rate =
+                (float) ((double) win
+                        / (double) (lose + win) *100.0);
+        if (rate > 50) {
+//            holder.winRateTextView.setTextColor();
+            holder.winRateTextView.setTextColor(Color.RED);
+        } else {
+            holder.winRateTextView.setTextColor(Color.BLUE);
+        }
+        holder.winRateTextView.setText("승률 \t"+Math.round(rate)+"%");
 
         String imgName;
         switch (tier) {
@@ -129,15 +136,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 imgName = "provisional";
                 break;
         }
-//        Drawable drawable = ContextCompat.getDrawable(context, item.getImage());
-//        holder.image.setBackground(drawable);
+
         int id = context.getResources().getIdentifier(imgName, "drawable", context.getPackageName());
         holder.tierImageView.setImageResource(id);
 
-//        Context context = tierImageView.getContext();
-//        int id = context.getResources().getIdentifier(imgName, "drawable", context.getPackageName());
-//        tierImageView.setImageResource(id);
-//        return imgName;
+        if (tier.isEmpty()) {
+//            int id2 = context.getResources().getIdentifier("provisional", "drawable", context.getPackageName());
+//            holder.tierImageView.setImageResource(id2);
+        }
+
     }
 
     @Override
@@ -161,7 +168,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             leaguePointTextView = itemView.findViewById(R.id.textView3);
             winTextView = itemView.findViewById(R.id.textView4);
             loseTextView = itemView.findViewById(R.id.textView5);
-//            winRateTextView = itemView.findViewById(R.id.textView);
+            winRateTextView = itemView.findViewById(R.id.textView6);
             cardview = (CardView) itemView.findViewById(R.id.cardview);
         }
     }

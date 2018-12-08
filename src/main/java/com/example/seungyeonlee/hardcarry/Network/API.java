@@ -2,6 +2,7 @@ package com.example.seungyeonlee.hardcarry.Network;
 
 import com.example.seungyeonlee.hardcarry.Models.Info;
 import com.example.seungyeonlee.hardcarry.Models.League;
+import com.example.seungyeonlee.hardcarry.Models.Match;
 import com.example.seungyeonlee.hardcarry.Models.MatchList;
 
 import java.util.List;
@@ -18,10 +19,10 @@ public interface API {
             @Path("summonerName") String summonerName
     );
 
-    @GET("match/v4/matchlists/by-account/{encryptedAccountId}?endIndex=10")
-    Call<List<MatchList>> getMatchList(
+    @GET("match/v4/matchlists/by-account/{encryptedAccountId}")
+    Call<MatchList> getMatchList(
             @Header("X-Riot-Token") String api_key,
-            @Path("encryptedAccountId") String accountId
+            @Path("encryptedAccountId") String encryptedAccountId
     );
 
     // https://kr.api.riotgames.com/lol/league/v4/positions/by-summoner/jYM4qsd5v9it0uQWyki1z3hFo5S1hzet3AilUQls-ssgZA

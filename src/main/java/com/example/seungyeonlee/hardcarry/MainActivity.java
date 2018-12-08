@@ -1,7 +1,6 @@
 package com.example.seungyeonlee.hardcarry;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -11,12 +10,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.seungyeonlee.hardcarry.Models.Info;
-import com.example.seungyeonlee.hardcarry.Models.MatchList;
 import com.example.seungyeonlee.hardcarry.Network.API;
 import com.example.seungyeonlee.hardcarry.Network.Key;
 import com.example.seungyeonlee.hardcarry.Network.RiotAPI;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
