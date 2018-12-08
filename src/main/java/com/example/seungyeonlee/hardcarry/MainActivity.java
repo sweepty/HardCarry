@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // 조회하려는 소환사 이름
-                String summonerName = inputTextView.getText().toString();
+                String summonerName = inputTextView.getText().toString().trim();
 
                 if (summonerName.matches("")) {
                     Toast.makeText(getApplicationContext(), "소환사명을 입력해주세요!", Toast.LENGTH_LONG).show();
