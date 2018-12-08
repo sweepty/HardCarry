@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView inputTextView;
     private Button searchBtn;
     private String userAccountId, name, encryptedSummonerId;
-    private Integer profileIconId;
+    private Integer profileIconId, summonerLevel;
 
     private List matchList;
 
@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                                 profileIconId = response.body().getProfileIconId();
                                 name = response.body().getName();
                                 encryptedSummonerId = response.body().getId();
+                                summonerLevel = response.body().getSummonerLevel();
 
                                 Toast.makeText(getApplicationContext(), "success"+response.body().getName(), Toast.LENGTH_SHORT).show();
 
@@ -105,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("name", name);
                                 intent.putExtra("profileIconId",profileIconId);
                                 intent.putExtra("encryptedSummonerId", encryptedSummonerId);
+                                intent.putExtra("summonerLevel", summonerLevel);
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(getApplicationContext(), "존재하지 않는 소환사 이름입니다.", Toast.LENGTH_LONG).show();

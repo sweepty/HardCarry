@@ -29,7 +29,7 @@
         android:ems="10"
         android:hint="소환사명을 입력하세요"
         android:inputType="textPersonName"
-        android:text="DWG ShowMaker"
+        android:text="hideonbush"
         app:layout_constraintEnd_toStartOf="@+id/button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

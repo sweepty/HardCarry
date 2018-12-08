@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.GradientDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +18,7 @@ import com.example.seungyeonlee.hardcarry.Network.API;
 import com.example.seungyeonlee.hardcarry.Network.Key;
 import com.example.seungyeonlee.hardcarry.Network.RiotAPI;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -33,11 +35,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DisplayResultActivity extends AppCompatActivity {
     private ImageView profileImg;
-    private TextView summonerName;
+    private TextView summonerName,summonerLevelTextView;
+    private Integer summonerLevel;
 
     private String summonerAccountId, encryptedSummonerId;
     private String name;
-    private Integer profileIconId;
+    private int profileIconId;
 
     private Bitmap bitmap;
 
@@ -61,9 +64,15 @@ public class DisplayResultActivity extends AppCompatActivity {
 
         // ImageView
         profileImg = (ImageView) findViewById(R.id.imageView);
+        GradientDrawable drawable=
+                (GradientDrawable) getApplicationContext().getDrawable(R.drawable.round_img);
+        profileImg.setBackground(drawable);
+        profileImg.setClipToOutline(true);
+
 
 //        // TextView
         summonerName = (TextView) findViewById(R.id.textView);
+        summonerLevelTextView = (TextView) findViewById(R.id.summonerLevelTextView);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, true);
@@ -79,14 +88,16 @@ public class DisplayResultActivity extends AppCompatActivity {
         encryptedSummonerId = intent.getStringExtra("encryptedSummonerId");
         name = intent.getStringExtra("name");
         profileIconId = intent.getIntExtra("profileIconId", 1);
-
+        summonerLevel = intent.getIntExtra("summonerLevel",1);
         System.out.println(summonerAccountId);
         System.out.println(encryptedSummonerId);
         System.out.println(name);
         System.out.println(profileIconId);
+        System.out.println(summonerLevel);
 
         // 소환사 이름
         summonerName.setText(name);
+        summonerLevelTextView.setText(Integer.toString(summonerLevel));
         setProfileImg();
 
 
@@ -164,6 +175,8 @@ public class DisplayResultActivity extends AppCompatActivity {
 
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
+                } catch (FileNotFoundException e) {
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

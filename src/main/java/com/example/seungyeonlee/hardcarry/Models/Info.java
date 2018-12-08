@@ -5,21 +5,13 @@ import com.google.gson.annotations.SerializedName;
 
 public class Info {
 
-    /* v3
-        "profileIconId": 6,
-        "name": "Hide on bush",
-        "summonerLevel": 168,
-        "accountId": 3440481,
-        "id": 4460427,
-        "revisionDate": 1542005949000
-    */
     /*  v4
         "profileIconId": 6,
         "name": "Hide on bush",
         "puuid": "TEQsvB3bqpg8839daj0igsCzHzo5oOMIf-YMkuRW2sKj_eCW4LVw6U_QbZnxc_KcXPLXAQjEbfvVaA",
         "summonerLevel": 172,
         "accountId": "hBt96CHvqMAE2Vq1U7vcnM2HSLkexk3yHtR5FUs0cORA",
-        "id": "jYM4qsd5v9it0uQWyki1z3hFo5S1hzet3AilUQls-ssgZA",
+        "id": "jYM4qsd5v9it0uQWyki1z3hFo5S1hzet3AilUQls-ssgZA", -> encryptedSummonerId
         "revisionDate": 1543786615000
 
     */
