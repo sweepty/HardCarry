@@ -228,7 +228,8 @@ public class DisplayResultActivity extends AppCompatActivity {
                 super.run();
 
                 try {
-                    URL url = new URL("http://ddragon.leagueoflegends.com/cdn/6.24.1/img/profileicon/"+profileIconId+".png");
+                    URL url = new URL("http://opgg-static.akamaized.net/images/profile_icons/profileIcon"+profileIconId+".jpg");
+//                    URL url = new URL("http://ddragon.leagueoflegends.com/cdn/6.24.1/img/profileicon/"+profileIconId+".png");
 
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setDoInput(true);
@@ -247,25 +248,8 @@ public class DisplayResultActivity extends AppCompatActivity {
                     e.printStackTrace();
                 } catch (FileNotFoundException e) {
                     System.out.println("파일이없어");
-                    try {
-                        URL url2 = new URL("http://ddragon.leagueoflegends.com/cdn/6.24.1/img/profileicon/588.png");
-                        HttpURLConnection conn = (HttpURLConnection) url2.openConnection();
-                        conn.setDoInput(true);
-                        conn.connect();
-
-                        InputStream is = conn.getInputStream();
-
-                        bitmap = BitmapFactory.decodeStream(is);
-                        System.out.println(bitmap);
-                    } catch (MalformedURLException e1) {
-                        e1.printStackTrace();
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
-
-
                 } catch (IOException e) {
-                    System.out.println("에러3");
+                    System.out.println("dpfj");
                     e.printStackTrace();
                 }
             }
