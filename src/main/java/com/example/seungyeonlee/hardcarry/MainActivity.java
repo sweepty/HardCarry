@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                                 encryptedSummonerId = response.body().getId();
                                 summonerLevel = response.body().getSummonerLevel();
 
-                                Toast.makeText(getApplicationContext(), "success"+response.body().getName(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "success \t"+response.body().getName(), Toast.LENGTH_SHORT).show();
 
                                 // 다음 뷰로 데이터 넘겨주기
 

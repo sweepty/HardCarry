@@ -235,15 +235,37 @@ public class DisplayResultActivity extends AppCompatActivity {
                     conn.connect();
 
                     InputStream is = conn.getInputStream();
+
                     bitmap = BitmapFactory.decodeStream(is);
+
                     System.out.println("@@@@@@@herererere");
                     System.out.println(bitmap);
 
+
                 } catch (MalformedURLException e) {
+                    System.out.println("에러1");
                     e.printStackTrace();
                 } catch (FileNotFoundException e) {
+                    System.out.println("파일이없어");
+                    try {
+                        URL url2 = new URL("http://ddragon.leagueoflegends.com/cdn/6.24.1/img/profileicon/588.png");
+                        HttpURLConnection conn = (HttpURLConnection) url2.openConnection();
+                        conn.setDoInput(true);
+                        conn.connect();
+
+                        InputStream is = conn.getInputStream();
+
+                        bitmap = BitmapFactory.decodeStream(is);
+                        System.out.println(bitmap);
+                    } catch (MalformedURLException e1) {
+                        e1.printStackTrace();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+
 
                 } catch (IOException e) {
+                    System.out.println("에러3");
                     e.printStackTrace();
                 }
             }

@@ -39,16 +39,26 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cardview, null);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.opgg_cardview, null);
+//        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cardview, null);
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-//        final League item = items.get(position);
-//        Drawable drawable = ContextCompat.getDrawable(context, item.getImage());
-//        holder.image.setBackground(drawable);
-//        holder.title.setText(item.getTitle());
+//        String queueType = mQueueType.get(position);
+//        String tier = mTier.get(position);
+//        String rank = mRank.get(position);
+//        Integer leaguePoint = mLeaguePoint.get(position);
+//        Integer win = mWin.get(position);
+//        Integer lose = mLose.get(position);
+//
+//        holder.queueTypeTextView.setText(queueType);
+//        holder.tierTextView.setText(tier.concat("\t"+ rank));
+//        holder.leaguePointTextView.setText(String.valueOf(leaguePoint).concat("LP"));
+//        holder.winTextView.setText(String.valueOf(win).concat("승"));
+//        holder.loseTextView.setText(String.valueOf(lose).concat("패"));
+
         String queueType = mQueueType.get(position);
         String tier = mTier.get(position);
         String rank = mRank.get(position);
@@ -57,20 +67,29 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         Integer lose = mLose.get(position);
 
         holder.queueTypeTextView.setText(queueType);
-        holder.tierTextView.setText(tier.concat("\t"+ rank));
+        if (tier.equals("CHALLENGER") || tier.equals("MASTER")) {
+            holder.tierTextView.setText(tier);
+        } else {
+            holder.tierTextView.setText(tier.concat("\t"+ rank));
+        }
+        System.out.println("티어 확인하자");
+        System.out.println(tier);
+        System.out.println(rank);
+
         holder.leaguePointTextView.setText(String.valueOf(leaguePoint).concat("LP"));
-        holder.winTextView.setText(String.valueOf(win).concat("승"));
-        holder.loseTextView.setText(String.valueOf(lose).concat("패"));
+//        holder.winTextView.setText(String.valueOf(win).concat("승"));
+//        holder.loseTextView.setText(String.valueOf(lose).concat("패"));
+
         double rate =
                 (float) ((double) win
                         / (double) (lose + win) *100.0);
-        if (rate > 50) {
-//            holder.winRateTextView.setTextColor();
-            holder.winRateTextView.setTextColor(Color.RED);
-        } else {
-            holder.winRateTextView.setTextColor(Color.BLUE);
-        }
-        holder.winRateTextView.setText("승률 \t"+Math.round(rate)+"%");
+//        if (rate > 50) {
+////            holder.winRateTextView.setTextColor();
+//            holder.winRateTextView.setTextColor(Color.RED);
+//        } else {
+//            holder.winRateTextView.setTextColor(Color.BLUE);
+//        }
+        holder.winRateTextView.setText(String.valueOf(win).concat("승/")+String.valueOf(lose).concat("패"+"\t("+Math.round(rate)+"%)"));
 
         String imgName;
         switch (tier) {
@@ -160,15 +179,24 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         public ViewHolder(View itemView) {
             super(itemView);
             // ImageView
-            tierImageView = itemView.findViewById(R.id.imageView);
+//            tierImageView = itemView.findViewById(R.id.imageView);
+            tierImageView = itemView.findViewById(R.id.imageView3);
 
             // TextView
-            queueTypeTextView = itemView.findViewById(R.id.textView);
-            tierTextView = itemView.findViewById(R.id.textView2);
-            leaguePointTextView = itemView.findViewById(R.id.textView3);
-            winTextView = itemView.findViewById(R.id.textView4);
-            loseTextView = itemView.findViewById(R.id.textView5);
-            winRateTextView = itemView.findViewById(R.id.textView6);
+//            queueTypeTextView = itemView.findViewById(R.id.textView);
+//            tierTextView = itemView.findViewById(R.id.textView2);
+//            leaguePointTextView = itemView.findViewById(R.id.textView3);
+//            winTextView = itemView.findViewById(R.id.textView4);
+//            loseTextView = itemView.findViewById(R.id.textView5);
+//            winRateTextView = itemView.findViewById(R.id.textView6);
+//            cardview = (CardView) itemView.findViewById(R.id.cardview);
+
+            queueTypeTextView = itemView.findViewById(R.id.textView9);
+            tierTextView = itemView.findViewById(R.id.textView10);
+            leaguePointTextView = itemView.findViewById(R.id.textView11);
+//            winTextView = itemView.findViewById(R.id.textView);
+//            loseTextView = itemView.findViewById(R.id.textView5);
+            winRateTextView = itemView.findViewById(R.id.rateTextView);
             cardview = (CardView) itemView.findViewById(R.id.cardview);
         }
     }
